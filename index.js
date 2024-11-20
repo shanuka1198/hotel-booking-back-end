@@ -53,5 +53,5 @@ app.use("/api/booking",bookingRouter);
 
 
 app.listen(5000,(req,res)=>{
-    console.log("server is start from port 6000")
+    console.log("server is start from port 5000")
 })

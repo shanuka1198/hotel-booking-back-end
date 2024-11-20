@@ -4,6 +4,7 @@ const gallerySchema=mongoose.Schema(
     {
         name:{
             type:String,
+            unique:true,
             required:true
         },
         image:{
