@@ -38,3 +38,23 @@ export function getGalleryItems(req,res){
     )
 }
 
+export function deleteGalleryItemFromName(req,res){
+    if (!isCustomerValid(req)){
+        res.json({
+            message:"Unauthorized"
+        })
+    }
+    const name=req.params.name;
+
+    gallery.findOneAndDelete({name:name}).then
+    ((result)=>{
+        res.json({
+            message:"image is deleted",
+            result:result
+        })
+    }).catch((err)=>{
+        res.json({
+            err:err
+        })
+    })
+}
