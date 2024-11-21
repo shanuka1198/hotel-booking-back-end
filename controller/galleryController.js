@@ -38,3 +38,27 @@ export function getGalleryItems(req,res){
     )
 }
 
+export function deleteGalleryItemFromName(req, res) {
+
+    const name = req.params.name;
+
+    gallery.findOneAndDelete({name:name})
+        .then((result) => {
+            if (!result) {
+                return res.status(404).json({
+                    message: "Gallery item not found"
+                });
+            }
+
+            res.json({
+                message: "Image is deleted successfully",
+                result: result
+            });
+        })
+        .catch((err) => {
+            res.status(500).json({
+                message: "An error occurred",
+                error: err.message
+            });
+        });
+}
