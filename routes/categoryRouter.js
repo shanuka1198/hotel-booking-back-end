@@ -8,5 +8,5 @@ categoryRouter.post("/",createCategory);
 categoryRouter.get("/",findCategory);
 categoryRouter.get("/:category",)
 categoryRouter.get("/:name",findByCategory);
-categoryRouter.patch("/:name",updateCategory)
+categoryRouter.put("/:name",updateCategory)
 export default categoryRouter;

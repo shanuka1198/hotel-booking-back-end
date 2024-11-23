@@ -46,15 +46,25 @@ export function deleteCategory(req,res){
 
 
     category.findOneAndDelete({name:name}).then(
-        ()=>{
-            res.json({
-                message:"category deleted"
-            })
+        (result)=>{
+            if (!result){
+                res.json({
+                    message:"can't find category",
+                    result:result
+                })
+            }else{
+                res.json({
+                    message:"category deleted",
+                    result:result
+                })
+            }
         }
+
     ).catch(
-        ()=>{
+        (err)=>{
             res.json({
-                message:"category delete fail"
+                message:"category delete fail",
+                err:err
             })
         }
     )
