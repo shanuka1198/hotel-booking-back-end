@@ -4,10 +4,11 @@ import category from "../models/category.js";
 
 
 export function saveGallery(req,res){
-    if (!isCustomerValid(req)){
+    if (!isAdminValid(req)){
         res.json({
             message:"Unauthorized"
         })
+        return;
     }
 
     const galleryDetails=req.body;

@@ -46,6 +46,12 @@ export function findUser(req,res){
 }
 
 export function deleteUser(req,res){
+    if (!isAdminValid(req)){
+        res.json({
+            message:"Unauthorized"
+        })
+        return;
+    }
     const username=req.params.username;
 
     user.findOneAndDelete({username:username}).then(
