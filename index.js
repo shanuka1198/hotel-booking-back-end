@@ -36,7 +36,6 @@ app.use((req,res,next)=>{
         jwt.verify(token,"secret",(err,decode)=>{
             if (decode!=null){
                 req.user=decode
-                console.log(decode)
                 next();
             }
         })

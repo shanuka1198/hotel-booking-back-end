@@ -7,27 +7,34 @@ export function createFeedBack(req,res) {
         res.json({
             message:"Unauthorized"
         })
+        return
     }
 
-    // Create a new feedback document
-  const newFeedback = new feedback({
-        name: req.body.name, // Ensure the client sends `name`
-        feedback: req.body.feedback, // Ensure the client sends `feedback`
-        email: req.user.email // Email from authenticated user
-    });
 
-    // Save to the database
+
+    const feedbacks={
+        email: req.user.email,
+        name: req.user.firstName,
+        feedback: req.body.feedback,
+        visible:req.body.visible
+    }
+
+
+    const newFeedback = new feedback(feedbacks);
+
     newFeedback.save()
         .then((result) => {
             res.status(201).json({
                 message: "Feedback is saved",
-                result: result
+                result: result,
+
             });
         })
         .catch((err) => {
             res.status(500).json({
                 message: "Feedback is not saved",
-                error: err.message // Provide error details
+                error: err.message,
+
             });
         });
 }
@@ -43,6 +50,21 @@ export function getFeedback(req,res){
             message: "feedback not found",
             err:err
         });
+    })
+}
+
+export function getFeedbackByVisible(req,res){
+
+    feedback.find({visible:true}).then((result)=>{
+        res.json({
+            message:"get feedback",
+            result:result
+        })
+    }).catch((err)=>{
+        res.json({
+            message:"can't get feedback",
+            err:err
+        })
     })
 }
 
