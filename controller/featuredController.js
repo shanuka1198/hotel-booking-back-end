@@ -49,5 +49,19 @@ export function createFeatured(req,res){
     })
 }
 
+export function getFeature(req,res){
+    featured.find().then((result)=>{
+        res.json({
+            message:"feature found",
+            result:result
+        });
+    }).catch((err)=>{
+        res.json({
+            message:"feature not found",
+            err:err
+        });
+    })
+}
+
 
 
