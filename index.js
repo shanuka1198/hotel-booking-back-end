@@ -10,6 +10,7 @@ import roomsRouter from "./routes/roomsRouter.js";
 import bookingRouter from "./routes/bookingRouter.js";
 import feedbackRouter from "./routes/feedbackRouter.js";
 import cors from "cors";
+import featuredRouter from "./routes/featuredRouter.js";
 
 dotenv.config()
 
@@ -50,6 +51,8 @@ app.use("/api/category",categoryRouter);
 app.use("/api/rooms",roomsRouter);
 app.use("/api/booking",bookingRouter);
 app.use("/api/feedback",feedbackRouter);
+app.use("/api/rooms",roomsRouter);
+app.use("/api/featured",featuredRouter);
 
 
 
