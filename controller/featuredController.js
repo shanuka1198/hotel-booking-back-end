@@ -12,6 +12,8 @@ export function createFeatured(req,res){
     //     return
     // }
 
+
+
     const roomId=req.params.roomId;
     rooms.findOne({roomId:roomId}).then((result)=>{
         if (!result){
@@ -20,6 +22,8 @@ export function createFeatured(req,res){
             })
             return
         }
+        const featuredCount=10;
+
         const roomFeatured={
             roomId:result.roomId,
             category:result.category,
@@ -30,22 +34,36 @@ export function createFeatured(req,res){
             notes:result.notes
         };
 
-        const newFeatured=new featured(roomFeatured);
-        newFeatured.save().then(
-            (result)=>{
+        featured.countDocuments().then((count)=>{
+            if (featuredCount>count){
                 res.json({
-                    message:"Save Rooms",
+                    message:"featured saved",
                     result:result
                 })
-            }
-        ).catch(
-            (err)=>{
+                const newFeatured=new featured(roomFeatured);
+                newFeatured.save().then(
+                    (result)=>{
+                        res.json({
+                            message:"Save Rooms",
+                            result:result
+                        })
+                        return
+                    }
+                ).catch(
+                    (err)=>{
+                        res.json({
+                            message:"Can't Save Rooms",
+                            result:err
+                        })
+                    }
+                )
+            }else {
                 res.json({
-                    message:"Can't Save Rooms",
-                    result:err
+                    message:"featured limit are over",
                 })
             }
-        )
+
+        });
     })
 }
 
