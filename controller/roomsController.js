@@ -1,5 +1,6 @@
 import rooms from "../models/room.js";
 import {isAdminValid} from "./userController.js";
+import gallery from "../models/gallery.js";
 
 export function creatRooms(req,res){
     if (!isAdminValid(req)){
@@ -100,3 +101,4 @@ export function getRoomsByCategory(req,res){
         }
     )
 }
+

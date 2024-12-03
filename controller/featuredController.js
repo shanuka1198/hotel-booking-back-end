@@ -22,7 +22,7 @@ export function createFeatured(req,res){
             })
             return
         }
-        const featuredCount=10;
+        const featuredCount=7;
 
         const roomFeatured={
             roomId:result.roomId,
@@ -36,23 +36,18 @@ export function createFeatured(req,res){
 
         featured.countDocuments().then((count)=>{
             if (featuredCount>count){
-                res.json({
-                    message:"featured saved",
-                    result:result
-                })
                 const newFeatured=new featured(roomFeatured);
                 newFeatured.save().then(
                     (result)=>{
                         res.json({
-                            message:"Save Rooms",
+                            message:"Save Featured",
                             result:result
                         })
-                        return
                     }
                 ).catch(
                     (err)=>{
                         res.json({
-                            message:"Can't Save Rooms",
+                            message:"Can't Save Featured",
                             result:err
                         })
                     }
@@ -79,6 +74,25 @@ export function getFeature(req,res){
             err:err
         });
     })
+}
+
+export function deleteFeature(req,res){
+    const roomId=req.params.roomId;
+
+    featured.deleteOne({roomId:roomId}).then((result)=>{
+        res.json({
+            message:"feature deleted",
+            result:result
+        });
+
+    }).catch((err)=>{
+        res.json({
+            message:"feature not deleted",
+            err:err
+        });
+
+    })
+
 }
 
 
