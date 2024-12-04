@@ -1,13 +1,16 @@
 import rooms from "../models/room.js";
 import {isAdminValid} from "./userController.js";
 import gallery from "../models/gallery.js";
+import category from "../models/category.js";
+import room from "../models/room.js";
 
 export function creatRooms(req,res){
-    if (!isAdminValid(req)){
-        res.status(403).json({
-            message:"Unauthorized"
-        })
-    }
+    // if (!isAdminValid(req)){
+    //     res.status(403).json({
+    //         message:"Unauthorized"
+    //     })
+    //     return
+    // }
     const roomsDetails=req.body;
     const newRooms=new rooms(roomsDetails);
 
@@ -122,6 +125,38 @@ export function deleteRoomById(req,res){
             res.status(500).json({
                 message: "An error occurred",
                 error: err.message
+            });
+        });
+}
+
+export function updateRoom(req, res) {
+    if (!isAdminValid(req)) {
+
+         res.status(403).json({
+            message: "Unauthorized"
+        });
+         return;
+    }
+
+    const roomId = req.params.roomId;
+
+    room.findOneAndUpdate({ roomId: roomId }, req.body,{ new: true })
+        .then((updatedRoom) => {
+            if (!updatedRoom) {
+                return res.status(404).json({
+                    message: "Category not found",
+                });
+            }
+
+            res.status(200).json({
+                message: "Category updated successfully",
+            });
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).json({
+                message: "Failed to update category",
+                error: err
             });
         });
 }
