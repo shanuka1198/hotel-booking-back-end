@@ -128,35 +128,3 @@ export function deleteRoomById(req,res){
             });
         });
 }
-
-export function updateRoom(req, res) {
-    if (!isAdminValid(req)) {
-
-         res.status(403).json({
-            message: "Unauthorized"
-        });
-         return;
-    }
-
-    const roomId = req.params.roomId;
-
-    room.findOneAndUpdate({ roomId: roomId }, req.body,{ new: true })
-        .then((updatedRoom) => {
-            if (!updatedRoom) {
-                return res.status(404).json({
-                    message: "Category not found",
-                });
-            }
-
-            res.status(200).json({
-                message: "Category updated successfully",
-            });
-        })
-        .catch((err) => {
-            console.error(err);
-            res.status(500).json({
-                message: "Failed to update category",
-                error: err
-            });
-        });
-}
