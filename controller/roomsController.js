@@ -105,10 +105,10 @@ export function getRoomsByCategory(req,res){
     )
 }
 
-export function deleteRoomById(req,res){
+export function deleteRoomById(req,res) {
     const roomId = req.params.roomId;
 
-    rooms.findOneAndDelete({roomId:roomId})
+    rooms.findOneAndDelete({roomId: roomId})
         .then((result) => {
             if (!result) {
                 return res.status(404).json({
@@ -125,6 +125,38 @@ export function deleteRoomById(req,res){
             res.status(500).json({
                 message: "An error occurred",
                 error: err.message
+            });
+        });
+}
+export function updateRoom(req, res) {
+    // if (!isAdminValid(req)) {
+    //     // Check if the user is authorized
+    //     return res.status(403).json({
+    //         message: "Unauthorized"
+    //     });
+    // }
+
+    const roomId = req.params.roomId;
+
+    room.findOneAndUpdate({ roomId: roomId }, req.body,{ new: true })
+        .then((updatedRoom) => {
+            if (!updatedRoom) {
+                return res.status(404).json({
+                    message: "Room not found",
+
+                });
+            }
+
+            res.status(200).json({
+                message: "Room updated successfully",
+            });
+        })
+        .catch((err) => {
+
+            console.error(err);
+            res.status(500).json({
+                message: "Failed to update Room",
+                error: err
             });
         });
 }

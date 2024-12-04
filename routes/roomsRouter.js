@@ -10,12 +10,14 @@ import {
 
 const roomsRouter=express.Router();
 
+
+roomsRouter.put("/:roomId",updateRoom)
 roomsRouter.get("/",getRooms);
 roomsRouter.get("/:category",getRoomsByCategory);
 roomsRouter.get("/:roomId",getRoomsById);
 roomsRouter.post("/",creatRooms);
 roomsRouter.delete("/:roomId",deleteRoomById)
-roomsRouter.put("/:roomId",updateRoom)
+
 
 
 
