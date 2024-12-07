@@ -1,8 +1,6 @@
 import rooms from "../models/room.js";
 import {isAdminValid} from "./userController.js";
-import gallery from "../models/gallery.js";
-import category from "../models/category.js";
-import room from "../models/room.js";
+
 
 export function creatRooms(req,res){
     // if (!isAdminValid(req)){
@@ -53,26 +51,23 @@ export function getRoomsById(req,res){
     const roomId=req.params.roomId;
 
     rooms.findOne({roomId:roomId}).then(
-        (result)=>{
-            if (result==null){
+        (resultRoom)=>{
+            if (!resultRoom){
                 res.json({
-                    message:"room not found",
+                    message:"not found"
                 })
-
             }else {
-                res.json(
-                    {
-                        message : "Room found",
-                        result : result
-                    }
-                )
+                console.log(resultRoom)
+                res.json({
+                    message:"Rooms found",
+                    resultRoom:resultRoom
+                })
             }
-
         }
     ).catch(
-        (err)=> {
+        (err)=>{
             res.json({
-                message: "can't find rooms by id",
+                message: "can't find room",
                 result: err
             })
         }
@@ -138,7 +133,7 @@ export function updateRoom(req, res) {
 
     const roomId = req.params.roomId;
 
-    room.findOneAndUpdate({ roomId: roomId }, req.body,{ new: true })
+    rooms.findOneAndUpdate({ roomId: roomId }, req.body,{ new: true })
         .then((updatedRoom) => {
             if (!updatedRoom) {
                 return res.status(404).json({

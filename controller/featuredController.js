@@ -95,5 +95,20 @@ export function deleteFeature(req,res){
 
 }
 
+export function getFeatureById(req,res){
+    const roomId=req.params.roomId;
+    featured.find({roomId:roomId}).then((result)=>{
+        res.json({
+            message:"feature found",
+            result:result
+        });
+    }).catch((err)=>{
+        res.json({
+            message:"feature not found",
+            err:err
+        });
+    })
+}
+
 
 

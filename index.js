@@ -48,7 +48,6 @@ app.use((req,res,next)=>{
 app.use("/api/users",userRoutes);
 app.use("/api/gallery",galleryRouter);
 app.use("/api/category",categoryRouter);
-app.use("/api/rooms",roomsRouter);
 app.use("/api/booking",bookingRouter);
 app.use("/api/feedback",feedbackRouter);
 app.use("/api/rooms",roomsRouter);

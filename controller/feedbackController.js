@@ -68,3 +68,26 @@ export function getFeedbackByVisible(req,res){
     })
 }
 
+export function deleteFeedback(req,res){
+    const email=req.params.email;
+
+    feedback.deleteOne({email:email}).then((result)=>{
+        if (!result){
+            res.json({
+                message:"user not found"
+            })
+
+        }else {
+            res.json({
+                message:"feedback deleted",
+                result:result
+            })
+        }
+    }).catch((err)=>{
+        res.json({
+            message:"feedback deleted faild",
+            err:err
+        })
+    })
+}
+
