@@ -14,6 +14,10 @@ const bookingSchema=mongoose.Schema({
         type: String,
         required: true
     },
+    firstName:{
+        type: String,
+
+    },
     status:{
         type: String,
         required: true,
@@ -29,6 +33,10 @@ const bookingSchema=mongoose.Schema({
     },
     end:{
         type: Date,
+        required: true
+    },
+    category:{
+        type: String,
         required: true
     },
     notes: {

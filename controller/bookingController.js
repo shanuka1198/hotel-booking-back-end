@@ -17,8 +17,11 @@ export function createBooking(req,res){
                 bookingId:bookingId,
                 roomId:req.body.roomId,
                 email:req.user.email,
+                firstName:req.user.firstName,
                 start : req.body.start,
-                end : req.body.end
+                end : req.body.end,
+                category:req.body.category,
+                notes:req.body.notes
             })
 
             newBooking.save().then(
@@ -48,6 +51,7 @@ export function createBooking(req,res){
         }
     )
 }
+
 
 export function deleteBooking(req,res){
     const bookingId=req.params.bookingId;

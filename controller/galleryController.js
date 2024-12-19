@@ -4,12 +4,12 @@ import category from "../models/category.js";
 
 
 export function saveGallery(req,res){
-    if (!isAdminValid(req)){
-        res.json({
-            message:"Unauthorized"
-        })
-        return;
-    }
+    // if (!isAdminValid(req)){
+    //     res.json({
+    //         message:"Unauthorized"
+    //     })
+    //     return;
+    // }
 
     const galleryDetails=req.body;
     const newGallery=new gallery(galleryDetails);

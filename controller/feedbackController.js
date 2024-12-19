@@ -1,5 +1,6 @@
 import feedback from "../models/feedback.js";
 import {isCustomerValid} from "./userController.js";
+import rooms from "../models/room.js";
 
 export function createFeedBack(req,res) {
 
@@ -91,3 +92,28 @@ export function deleteFeedback(req,res){
     })
 }
 
+export function updateFeedBack(req,res){
+
+    feedback.findOneAndUpdate({ email:req.body.email}, {visible:req.body.visible})
+        .then((updatedFeedback) => {
+            if (!updatedFeedback) {
+                return res.status(404).json({
+                    message: "Feedback not found",
+
+                });
+            }
+
+            res.status(200).json({
+                message: "Feedback updated successfully",
+                result:updatedFeedback
+            });
+        })
+        .catch((err) => {
+
+            console.error(err);
+            res.status(500).json({
+                message: "Feedback to update Room",
+                error: err
+            });
+        });
+}
