@@ -94,7 +94,9 @@ export function loginUser(req,res){
                         email: user.email,
                         firstName: user.firstName,
                         lastName: user.lastName,
-                        type: user.type
+                        type: user.type,
+                        whatsApp:user.whatsApp,
+                        phone:user.phone
                     }
 
                     const token = jwt.sign(payload, process.env.JWT);

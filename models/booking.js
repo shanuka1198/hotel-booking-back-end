@@ -14,6 +14,14 @@ const bookingSchema=mongoose.Schema({
         type: String,
         required: true
     },
+    whatsApp:{
+        type:String,
+
+    },
+    phone:{
+        type:String,
+
+    },
     firstName:{
         type: String,
 
@@ -34,6 +42,10 @@ const bookingSchema=mongoose.Schema({
     end:{
         type: Date,
         required: true
+    },
+    price:{
+        type: String,
+
     },
     category:{
         type: String,
